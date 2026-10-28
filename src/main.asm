@@ -6,8 +6,9 @@ section .data
 section .text
 _start:
     ; Dodaj dwie liczby.
-    mov rax, 6
-    add rax, 2
+    mov rdi, 6
+    add rsi, 2
+    call add_numbers
 
     ; Zamien wynik 0–9 na znak ASCII.
     add al, '0'
@@ -36,3 +37,8 @@ _start:
     ; mov eax, 1           ; Numer wywolania exit.
     ; mov ebx, 0           ; Kod zakonczenia — sukces.
     ; int 0x80
+
+add_numbers:
+    mov rax, rdi
+    add rax, rsi
+    ret
