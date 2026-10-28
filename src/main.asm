@@ -6,8 +6,8 @@ section .data
 section .text
 _start:
     ; Dodaj dwie liczby.
-    mov rax, 3
-    add rax, 4
+    mov rax, 6
+    add rax, 2
 
     ; Zamien wynik 0–9 na znak ASCII.
     add al, '0'
