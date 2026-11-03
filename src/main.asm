@@ -1,32 +1,38 @@
 global _start
 
 section .data
-    array dq 3, 4, 1, 2, 5
+    array1 dq 3, 4, 1, 2, 5
+    array2 dq 1, 2, 3, 4, 5
 
 section .bss
-    suma resq 1
+    result_array resq 5
 
 section .text
 _start:
+    mov rdi, array1
+    mov rsi, array2
+    mov rdx, result_array
     mov rcx, 5
-    mov rdi, 0
-    jmp array_sum
+    call add_arrays
+    jmp exit
 
 add_numbers:
-    mov rax, rdi
-    add rax, rsi
+    mov qword rax, [rdi]
+    add qword rax, [rsi]
     ret
 
-array_sum:
-    mov rsi, [array + rbx * 8]
+add_arrays:
     call add_numbers
-    mov rdi, rax
+    mov [rdx], rax
 
-    inc rbx
-    loop array_sum
+    add rdi, 8
+    add rsi, 8
+    add rdx, 8
+
+    loop add_arrays
+    ret
 
 exit:
-    mov [suma], qword rdi
     mov rax, 60            ; Numer wywolania exit.
     mov rdi, 0             ; Kod zakonczenia — sukces.
     syscall
